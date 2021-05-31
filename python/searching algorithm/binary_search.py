@@ -2,21 +2,22 @@ array = list(range(1, int(input("Input Array Length :"))))
 #array = [-4, -2, 5, 6, 8, 10, 14]
 
 
-def search(num):
+def search(num, arr):
     start = 0
-    end = len(array)
+    end = len(arr)
     while True:
         mid = (start + end) // 2
-        if(array[mid] == num):
-            print("found at index "+str(mid))
+        if(arr[mid] == num):
+            return mid
             break
-        elif(array[mid] < num):
+        elif(arr[mid] < num):
             start = mid
-        elif(array[mid] > num):
+        elif(arr[mid] > num):
             end = mid
-        if(start == end-1 and array[0] != num):
-            print("element not present in array")
+        if(start == end-1 and arr[0] != num):
+            return -1
             break
 
 
-search(int(input("Search :")))
+output = search(int(input("Search :")), array)
+print(output)

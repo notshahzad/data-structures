@@ -1,9 +1,13 @@
 first = None
 last = None
+
+
 class Node():
-    def __init__(self,element):
+    def __init__(self, element):
         self.element = element
         self.pointer = None
+
+
 def CreateLinkedList(element):
     global first, last
     if first == None:
@@ -12,6 +16,8 @@ def CreateLinkedList(element):
         new = Node(element)
         last.pointer = new
         last = new
+
+
 def PrintLinkedList():
     print('-'*69)
     node = first
@@ -21,8 +27,10 @@ def PrintLinkedList():
             break
         node = node.pointer
     print('-'*69)
-def InsertElement(position,element):
-    global first,last
+
+
+def InsertElement(position, element):
+    global first, last
     if position == -1:
         CreateLinkedList(element)
         return 0
@@ -42,8 +50,10 @@ def InsertElement(position,element):
                 node = new
             node = node.pointer
             i += 1
+
+
 def DeleteElement(position):
-    global first,last
+    global first, last
     if position == 0:
         first = first.pointer
     elif position == -1:
@@ -64,13 +74,18 @@ def DeleteElement(position):
                 return 0
             node = node.pointer
             i += 1
+
+
 while 1:
-    choice = input('press c to create, i to insert, d to delete and p for print.\n')
+    choice = input(
+        'press c to create, i to insert, d to delete and p for print.\n')
     if choice.lower() == 'c':
         CreateLinkedList(input('enter element :'))
     elif choice.lower() == 'i':
-        InsertElement(int(input('enter position(input -1 if last ;) ):')),input('input element :'))
+        InsertElement(int(input('enter position(input -1 if last ;) ):')),
+                      input('input element :'))
     elif choice.lower() == 'p':
         PrintLinkedList()
     elif choice.lower() == 'd':
-        DeleteElement(int(input('enter element position (input -1 if last ;) :')))
+        DeleteElement(
+            int(input('enter element position (input -1 if last ;) :')))

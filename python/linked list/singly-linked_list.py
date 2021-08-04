@@ -32,6 +32,8 @@ def InsertElement(position,element):
             node = new
         node = node.pointer
         i+=1
+def DeleteElement(position):
+     i=0
 while 1:
     choice = input('press c to create, i to insert and p for print.\n')
     if choice.lower() == 'c':

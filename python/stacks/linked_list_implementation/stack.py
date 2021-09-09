@@ -22,18 +22,24 @@ def Push(data):
 
 def PrintLinkedList():
     i = first
-    while 1:
-        print(i.data)
-        if i == Last:
-            break
+    if first == None:
+        print('stacks are empty')
+    else:
+        while 1:
+            print(i.data)
+            if i == Last:
+                break
 
-        i = i.next
+            i = i.next
 
 
 def Pop():
-    global Last
-    Last = Last.previous
-    Last.next = None
+    global first, Last
+    if first == Last:
+        first = Last = None
+    else:
+        Last = Last.previous
+        Last.next = None
 
 
 while 1:

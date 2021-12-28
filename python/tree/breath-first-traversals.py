@@ -32,12 +32,26 @@ class tree:
                 temp = self.root
                 self.root = self.root.right
 
-    def Traverse(self, root):
+    def PreOrderTraverse(self, root):
+        print(root.data, end=" ")
         if root.left != None:
-            self.Traverse(root.left)
-        print(root.data)
+            self.PreOrderTraverse(root.left)
         if root.right != None:
-            self.Traverse(root.right)
+            self.PreOrderTraverse(root.right)
+
+    def InOrderTraverse(self, root):
+        if root.left != None:
+            self.InOrderTraverse(root.left)
+        print(root.data, end=" ")
+        if root.right != None:
+            self.InOrderTraverse(root.right)
+
+    def PostOrderTraverse(self, root):
+        if root.left != None:
+            self.PostOrderTraverse(root.left)
+        if root.right != None:
+            self.PostOrderTraverse(root.right)
+        print(root.data, end=" ")
 
     def FindElement(self, element):
         i = self.root
@@ -55,12 +69,19 @@ class tree:
 
 
 t = tree()
-t.CreateNode(1)
-t.CreateNode(5)
-t.CreateNode(2)
-t.CreateNode(3)
 t.CreateNode(6)
+t.CreateNode(5)
+t.CreateNode(9)
+t.CreateNode(2)
+t.CreateNode(7)
+t.CreateNode(10)
+t.CreateNode(1)
 t.CreateNode(4)
-t.Traverse(t.root)
-t.FindElement(6)
-t.FindElement(727)
+t.CreateNode(8)
+t.CreateNode(3)
+t.InOrderTraverse(t.root)
+print("\n")
+t.PreOrderTraverse(t.root)
+print("\n")
+t.PostOrderTraverse(t.root)
+print("\n")

@@ -11,7 +11,7 @@ struct Map{
 };
 struct keyValue{
   char *key;
-  int hash;
+  size_t hash;
   union{
     int _int;
     char *_string;
@@ -81,12 +81,12 @@ void InsertKeyValuePair_int(struct Map **map,char *key,int value){
   }else{
    struct keyValue *i = *keyvalnode; 
     while (1){
-      if (strcmp(strkey,i->key)){
+      if (hash == i->hash){
         printf("can't insert on same key\n");
         break;
       }
       if (i->next == NULL){
-        CreateKeyValuePair_int(keyvalnode,strkey,hash,value);
+        CreateKeyValuePair_int(&(i->next),strkey,hash,value);
         break;
       }
       i = i->next;
@@ -106,7 +106,7 @@ void InsertKeyValuePair_string(struct Map **map,char *key,char *value){
   }else{
    struct keyValue *i = *keyvalnode; 
     while (1){
-      if (strcmp(strkey,i->key) == 0){
+      if (hash == i->hash){
         printf("can't insert on same key\n");
         break;
       }else{
@@ -114,7 +114,7 @@ void InsertKeyValuePair_string(struct Map **map,char *key,char *value){
 
       }
       if (i->next == NULL){
-        CreateKeyValuePair_string(keyvalnode,strkey,hash,strval);
+        CreateKeyValuePair_string(&(i->next),strkey,hash,strval);
         break;
       }
       i = i->next;
@@ -126,7 +126,7 @@ int retintvaluefromkey(struct Map **map,char *key,int *res){
   size_t index = ( hash / (*map)->size ) % 10;
   struct keyValue *keyvalnode =*(( (*map)->KeyValues ) + index  ); 
   while (keyvalnode != NULL){
-    if (strcmp(key,keyvalnode->key) == 0){
+    if (hash == keyvalnode->hash ){
       *res = keyvalnode->_int;
       return 1;
     }
@@ -139,11 +139,11 @@ int retstringvaluefromkey(struct Map **map,char *key,char **buffer,char mode){
   size_t index = ( hash / (*map)->size ) % 10;
   struct keyValue *keyvalnode =*(( (*map)->KeyValues ) + index  ); 
   while (keyvalnode != NULL){
-    if (strcmp(key,keyvalnode->key) == 0){
-      if (mode == 'd'){
+    if (hash == keyvalnode->hash ){
+      if (mode == 's'){
         *buffer = keyvalnode->_string;
         return 1;
-      }else if (mode == 'c'){
+      }else if (mode == 'd'){
         *buffer = malloc(strlen(keyvalnode->_string));
         strcpy(*buffer,keyvalnode->_string);
         return 1;
